@@ -19,4 +19,4 @@ mean(column_means)
 median(column_means)
 sd(column_means)
 
-
+max_value = max(apply(methylation_data, 2, function(x) max(x, na.rm = TRUE))) 
