@@ -7,57 +7,47 @@ import numpy as np
 import argparse
 import random
 
-def choose_dmr(cpg):
+
+def choose_random_cases(case):
 
     """
-    pseudo-randomly decide if the cpg should be differentially methylated between tissues
-    :param cpg: number of cpgs
-    :return: a dict that contains a bool (0 or 1) indicating whether that cpg should be differentially methylated
+    pseudo-randomly decide if a case should be selected
+    :param case: number of cases (individual or cpgs)
+    :return: a dict that contains a bool (0 or 1) indicating whether or not case is selected
     """
 
-    cpg_dict = dict.fromkeys(range(cpg))  # generate dict where the keys are the cpgs of interest
+    case_dict = dict.fromkeys(range(cpg))  # generate dict where the keys are the cpgs of interest
 
-    for cpg in cpg_dict:  # for each cpg pick a 0 or 1 and assign it as the value
-        cpg_dict[cpg] = random.randint(0, 1)
+    for case in case_dict:  # for each cpg pick a 0 or 1 and assign it as the value
+        case_dict[case] = random.randint(0, 1)
+    return case_dict
 
-    return(cpg_dict)
 
-
-def assign_cpg_to_tissue(cpg_dict, tissue):
+def create_array(case_dict, mean, sd, max, size, distribution_type, scaling, column_stack):
     """
-    pseudo-randomly assigns a dm cpg to be associated with a particular tissue
-    :param cpg_dict: dictionary containing information on whether cpg is differentially methylated
-    :param tissue: number of tissues for simulation
-    :return: a dict containing which cpgs are associated with a given tissue (for reference simulation)
+    creates an array where if a particular case is selected, values are generated around a given distribution
+    otherwise values are generated so that they are similar, with a small degree of noise
+    :param case_dict: either cpg or individual dictionaries that indicate which cases should be selected
+    :param mean:
+    :param sd:
+    :param max:
+    :param size: number of values to be generated
+    :param distribution_type:
+    :param column_stack: bool value indicating how to appropriately arrange the data
+    :return: an array containing values (methylation or cell type proportions) that have a particular distribution
     """
+    array_list = [[] for i in range(size)]
 
-    # generate tissue data structs
-    tissues = list(range(tissue))  # list of each tissue
-    tissue_dict = dict.fromkeys(tissues) # makes a blank list for each tissue
-    for tissue in tissue_dict:
-        tissue_dict[tissue] = []
-
-    # for each cpg if it is a dmr, pick a random tissue and assign that cpg to that tissue key in the tissue dict
-    # multiple cpgs may be assigned to one tissue
-    for cpg in cpg_dict:
-        if cpg_dict[cpg] == 1:
-            tissue = random.choice(tissues)
-            tissue_dict[tissue].append(cpg)
-
-    return tissue_dict
-
-
-def create_reference_array(tissue_dict, cpg_dict, mean, sd):
-    ref_array_lists = [[] for i in range(len(tissue_dict))]
-
-    for cpg in range(len(cpg_dict)):
-        print(cpg)
-        if cpg_dict[cpg] == 1:
-            ref_array_lists[cpg] = np.random.normal(mean, sd, len(cpg_dict))
+    for case in range(len(case_dict)):
+        if case_dict[case] == 1:
+            array_list[case] = distribution_type(mean, sd, size)*scaling
         else:
-            l
-
-        print(ref_array_lists)
+            static_value = max / 100 * random.randint(10, 99)
+            array_list[case] = [static_value + random.choice(np.arange(-(static_value/10), static_value/10, scaling/10)) for i in range(size)]
+    if column_stack:
+        return np.column_stack(array_list)
+    else:
+        return np.vstack(array_list)
 
 if __name__ == "__main__":
 
@@ -75,12 +65,21 @@ if __name__ == "__main__":
     cpg = args.cpgs
     tissue = args.tissues
 
-    # hardcoded mean and sd from methylation dataset mentioned in refactor paper
+    # hardcoded mean and sd from methylation data set mentioned in refactor paper
     # TODO change this to something better
     mean = 7000
+    maximum = 60000
     sd = 435
 
-    # TODO make this into function, not in main method
-    cpg_dict = choose_dmr(cpg)
-    tissue_dict = assign_cpg_to_tissue(cpg_dict, tissue)
-    create_reference_array(tissue_dict, cpg_dict, mean, sd)
+    cpg_dict = choose_random_cases(cpg)  # select random cpgs to be differentially methylated
+    individual_dict = choose_random_cases(individual)  # select individuals to have non-normal levels of cfDNA
+
+    # creates a reference array where methylation values are normally distributed if they are differentially methylated
+    # and base these methylation values around the descriptive statistics of the aforementioned data set
+    ref_array = create_array(cpg_dict, mean, sd, maximum, tissue, np.random.normal, 1, True)
+
+    # create an array of cell proportions for each individual where proportions have a lognormal(skewed) distribution
+    # indicating a non-normal (perhaps disease) state
+    cell_proportion_array = create_array(individual_dict, 2, 0.2, 1, cpg, np.random.lognormal, 0.1, False)
+    print(ref_array)
+    print(cell_proportion_array)
