@@ -32,30 +32,27 @@ def create_array(case_dict, mean, sd, max, rows, columns, distribution_type, sca
     :param column_stack: bool value indicating how to appropriately arrange the data
     :return: an array containing values (methylation or cell type proportions) that have a particular distribution
     """
+    array_list = []
     if column_stack:
-        array_list = [[] for i in range(columns)]
-        for case in range(len(array_list)):
+        
+        for case in range(columns):
             if case_dict[case]:
-                array_list[case] = distribution_type(mean, sd, rows) * scaling
+                array_list.append(distribution_type(mean, sd, rows) * scaling)
             else:
                 static_value = max / 100 * random.randint(10, 99)
-                array_list[case] = [
+                array_list.append([
                     static_value + random.choice(np.arange(-(static_value / 10), static_value / 10, scaling / 10))
-                    for i in range(rows)]
-            print(array_list)
-
+                    for i in range(rows)])
         return np.column_stack(array_list)
 
     else:
-        array_list = [[] for i in range(rows)]
-
-        for case in range(len(array_list)):
+        for case in range(columns):
             if case_dict[case] == 1:
-                array_list[case] = distribution_type(mean, sd, columns)*scaling
+                array_list.append(distribution_type(mean, sd, columns)*scaling)
             else:
                 static_value = max / 100 * random.randint(10, 99)
-                array_list[case] = [static_value + random.choice(np.arange(-(static_value/10), static_value/10, scaling/10))
-                                    for i in range(columns)]
+                array_list.append([static_value + random.choice(np.arange(-(static_value/10), static_value/10, scaling/10))
+                                    for i in range(columns)])
         return np.vstack(array_list)
 
 if __name__ == "__main__":
