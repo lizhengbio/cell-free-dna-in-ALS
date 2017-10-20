@@ -13,13 +13,9 @@ def choose_random_cases(case):
     """
     pseudo-randomly decide if a case should be selected
     :param case: number of cases (individual or cpgs)
-    :return: a dict that contains a bool (0 or 1) indicating whether or not case is selected
+    :return: a dict that contains a bool indicating whether or not case is selected
     """
-
-    case_dict = dict.fromkeys(range(case))  # generate dict where the keys are the cpgs of interest
-
-    for case in case_dict:  # for each cpg pick a 0 or 1 and assign it as the value
-        case_dict[case] = random.randint(0, 1)
+    case_dict = {i: random.choice([False, True]) for i in range(case)}
     return case_dict
 
 
@@ -36,30 +32,27 @@ def create_array(case_dict, mean, sd, max, rows, columns, distribution_type, sca
     :param column_stack: bool value indicating how to appropriately arrange the data
     :return: an array containing values (methylation or cell type proportions) that have a particular distribution
     """
+    array_list = []
     if column_stack:
-        array_list = [[] for i in range(columns)]
-        for case in range(len(array_list)):
-            if case_dict[case] == 1:
-                array_list[case] = distribution_type(mean, sd, rows) * scaling
+        
+        for case in range(columns):
+            if case_dict[case]:
+                array_list.append(distribution_type(mean, sd, rows) * scaling)
             else:
                 static_value = max / 100 * random.randint(10, 99)
-                array_list[case] = [
+                array_list.append([
                     static_value + random.choice(np.arange(-(static_value / 10), static_value / 10, scaling / 10))
-                    for i in range(rows)]
-            print(array_list)
-
+                    for i in range(rows)])
         return np.column_stack(array_list)
 
     else:
-        array_list = [[] for i in range(rows)]
-
-        for case in range(len(array_list)):
+        for case in range(columns):
             if case_dict[case] == 1:
-                array_list[case] = distribution_type(mean, sd, columns)*scaling
+                array_list.append(distribution_type(mean, sd, columns)*scaling)
             else:
                 static_value = max / 100 * random.randint(10, 99)
-                array_list[case] = [static_value + random.choice(np.arange(-(static_value/10), static_value/10, scaling/10))
-                                    for i in range(columns)]
+                array_list.append([static_value + random.choice(np.arange(-(static_value/10), static_value/10, scaling/10))
+                                    for i in range(columns)])
         return np.vstack(array_list)
 
 if __name__ == "__main__":
