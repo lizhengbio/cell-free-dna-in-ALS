@@ -1,0 +1,9 @@
+using DataFrames
+using PyPlot
+
+test = readtable("/Users/Christa.Caggiano/Desktop/100_stats.txt", separator='\t')
+
+pyplot()
+fig = plt.figure("pyplot_barplot",figsize=(10,10))
+bar(test[:,2],test[:,2])
+subplot(211)
