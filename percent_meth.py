@@ -6,10 +6,11 @@ from collections import defaultdict
 import glob
 
  
- # glob.glob("SRR*/unsortedButMerged_ForBismark_file/methylation_extraction/CpG_context_SRR*_unsorted_merged.deduplicated.txt")
+# glob.glob("SRR*/unsortedButMerged_ForBismark_file/methylation_extraction/CpG_context_SRR*_unsorted_merged.deduplicated.txt")
 def write_results(key, value, output_file):
     with open(output_file, "a") as out:
         print("{} {} {} {} {}".format(key[0], key[1], value[0], value[1], value[0]/(value[0]+value[1])), file=out)
+
 
 def run(input_file, output_file):
     i = 0
@@ -36,7 +37,6 @@ def run(input_file, output_file):
             else:
                 minuses += 1
             i += 1
-
 
 
 if __name__ == "__main__":
