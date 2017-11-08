@@ -78,7 +78,7 @@ if __name__ == "__main__":
     control_num = 0
 
 
-    # TODO proportion methylated
+    # # TODO proportion methylated
     mean = 7000
     maximum = 60000
     sd = 435
@@ -98,6 +98,6 @@ if __name__ == "__main__":
     print(ref_array)
     print(cell_proportion_array)
     observed_array = np.dot(cell_proportion_array, ref_array)
-    # print(observed_array)
+    print(observed_array)
     # TODO add in noise y = mr + e
 
