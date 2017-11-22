@@ -23,7 +23,9 @@ parallel job batch submitted to SGE using **qsub_submit.sh**
 original pipeline **/ye/zaitlenlabstore/christacaggiano/dna-me-pipeline/HAIB/bismark_pipeline** 
 
 als files **/ye/zaitlenlabstore/christacaggiano/primary_ALS_WGBS/fastq** 
+
 pipeline output **/ye/zaitlenlabstore/christacaggiano/primary_ALS_WGBS/FILENAME_HERE**
+
 file key **/ye/zaitlenlabstore/christacaggiano/primary_ALS_WGBS/sample_key.txt** 
 
   
