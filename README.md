@@ -22,7 +22,6 @@ Output files:
 ------  
 
 1. Pool any replicates 
-
 2. Sort files 
 3. Collapse all observations of a given CpG site 
 4. For each CpG site present, calculate percent methylation, i.e. number of methylated observations/total observations
@@ -30,13 +29,11 @@ Output files:
 ### methylation chip datasets 
 ------
 
-[GSE40279](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40279) [Hannum_et_all](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23177740)
 
-
-| GEO accession | Study         | File link  |
-| ------------- |:-------------:| ----------:|
-| [GSE40279](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40279)      | [Hannum_et_al](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23177740)| [series_matrix](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE40nnn/GSE40279/matrix/GSE40279_series_matrix.txt.gz)      |
-| col 2 is      | centered      |   $12      |
+| GEO accession | Study         | File link  | Tissue(s)  |
+| ------------- |---------------| -----------|------------|
+| [GSE40279](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40279)      | [Hannum et al (2012)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23177740)| [series_matrix](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE40nnn/GSE40279/matrix/GSE40279_series_matrix.txt.gz)      | whole blood|
+| col 2 is      | [Huynh et al (2014)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/24270187)      |   $12      |
 | zebra stripes | are neat      |    $1      |
 
 
