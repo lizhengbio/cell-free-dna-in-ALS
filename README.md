@@ -28,6 +28,7 @@ Output files:
 
 ### methylation chip datasets 
 ------
+[s](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE40nnn/GSE40279/matrix/GSE40279_series_matrix.txt.gz)
 
 
 | GEO accession | Study         | File link  | Tissue(s)  |
