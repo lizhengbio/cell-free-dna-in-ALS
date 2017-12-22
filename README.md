@@ -2,23 +2,47 @@
 ## Zaitlen ALS Project Fall 2017 
 ## author: <christa.caggiano@ucsf.edu> 
 
-### pipeline 
-based on https://github.com/ENCODE-DCC/dna-me-pipeline/blob/master/HAIB/bismark_pipeline/bismark_pipeline_main.sh
-currently called wgbs_last_step.py - will be updated TBA 
-0. check quality with fastqc 
-1. Trim-galore: https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/
-2. Run bismark alignment on paired-end trimmed fastqs using Bowtie 2 
-3. Bismark CpG methylation extraction 
-4. Take Bismark methylation files:
-    * sort using bash 
-    * pool all methylation calls for a given locus- custom python script (percent_meth2.py) 
-    * pool by sample if necessary - custom python script (percent_meth3.py) 
-5. output files: 
-    * aligned bams 
-    * methylation reports (command, summary of run) 
-    * methylation extraction txt files --- used for rest of analyses 
+### Whole Genome Bisulfite Sequencing (WGBS) Analysis 
+------
+Pipeline to process raw WGBS here is based on the WGBS pipeline from the ENCODE consortium, [found on github](https://github.com/ENCODE-DCC/dna-me-pipeline/blob/master/HAIB/bismark_pipeline/bismark_pipeline_main.sh) 
 
-### misc files  
+My implementation of this pipeline can be found [here](https://github.com/christacaggiano/ENCODE_WGBS) and uses the following steps: 
+
+0. Check quality of raw fastq files with fastqc 
+1. Remove adapters and trim reads
+2. Align to hg38 using Bowtie2  
+3. Find methylated and unmethylated sites using Bismark methylation extraction  
+
+Output files: 
+    * aligned bams 
+    * methylation reports (command, summary of run)  
+    * methylation extraction txt files --- used for rest of analyses
+
+### post-analysis of WGBS data
+------  
+
+1. Pool any replicates 
+
+2. Sort files 
+3. Collapse all observations of a given CpG site 
+4. For each CpG site present, calculate percent methylation, i.e. number of methylated observations/total observations
+
+### methylation chip datasets 
+------
+
+[GSE40279](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40279) [Hannum_et_all](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23177740)
+
+
+| GEO accession | Study         | File link  |
+| ------------- |:-------------:| ----------:|
+| [GSE40279](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40279)      | [Hannum_et_al](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23177740)| [series_matrix](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE40nnn/GSE40279/matrix/GSE40279_series_matrix.txt.gz)      |
+| col 2 is      | centered      |   $12      |
+| zebra stripes | are neat      |    $1      |
+
+
+### other 
+
+#### file locations   
 parallel job batch submitted to SGE using **qsub_submit.sh**  
 
 original pipeline **/ye/zaitlenlabstore/christacaggiano/dna-me-pipeline/HAIB/bismark_pipeline** 
