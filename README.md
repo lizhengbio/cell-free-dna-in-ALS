@@ -28,15 +28,17 @@ Output files:
 
 ### methylation chip datasets 
 ------
-[s](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE40nnn/GSE40279/matrix/GSE40279_series_matrix.txt.gz)
-
 
 | GEO accession | Study         | File link  | Tissue(s)  |
 | ------------- |---------------| -----------|------------|
-| [GSE40279](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40279)      | [Hannum et al (2012)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23177740)| [series_matrix](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE40nnn/GSE40279/matrix/GSE40279_series_matrix.txt.gz)      | whole blood|
-| col 2 is      | [Huynh et al (2014)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/24270187)      |   $12      |
-| zebra stripes | are neat      |    $1      |
 
+| [GSE40279](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40279)| [Hannum et al (2012)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23177740)| [series_matrix](https://goo.gl/CaGDpK)| whole blood|
+
+| [GSE40360](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40360)   | [Huynh et al (2014)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/24270187)| [series_matrix(ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE71nnn/GSE71378/matrix/GSE71378_series_matrix.txt.gz) | frontal lobe white matter|
+
+| [GSE71378](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE71378) | [Synder et al (2016)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/26771485)| [series_matrix](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE40nnn/GSE40360/matrix/GSE40360_series_matrix.txt.gz)     | healthy cfDNA|
+
+| [GSE48472](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE48472) | [Slieker et al (2013)](https://epigeneticsandchromatin.biomedcentral.com/articles/10.1186/1756-8935-6-26#Bib1)| [series_matrix](ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE48nnn/GSE48472/matrix/GSE48472_series_matrix.txt.gz)  | various tissues| 
 
 ### other 
 
