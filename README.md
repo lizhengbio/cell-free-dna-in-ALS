@@ -14,9 +14,9 @@ My implementation of this pipeline can be found [here](https://github.com/christ
 3. Find methylated and unmethylated sites using Bismark methylation extraction  
 
 Output files: 
-    * aligned bams 
-    * methylation reports (command, summary of run)  
-    * methylation extraction txt files --- used for rest of analyses
+    	* aligned bams 
+    	* methylation reports (command, summary of run)  
+    	89* methylation extraction txt files --- used for rest of analyses
 
 ### post-analysis of WGBS data
 ------  
@@ -26,8 +26,10 @@ Output files:
 3. Collapse all observations of a given CpG site 
 4. For each CpG site present, calculate percent methylation, i.e. number of methylated observations/total observations
 
-### methylation chip datasets 
+### reference datasets 
 ------
+
+#### methylation chip datasets
 
 | GEO accession | Study         | File link  | Tissue(s)  |
 |---------------|---------------|------------|------------|
@@ -36,6 +38,17 @@ Output files:
 | [GSE71378](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE71378) | [Synder et al (2016)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/26771485)| [series_matrix](https://goo.gl/hvuGWr)     | healthy cfDNA|
 | [GSE48472](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE48472) | [Slieker et al (2013)](https://epigeneticsandchromatin.biomedcentral.com/articles/10.1186/1756-8935-6-26#Bib1)| [series_matrix](https://goo.gl/pP4Zoc)  | various tissues| 
 | [GSE62727](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE62727) | [Zhou et al (2017)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/28849195)| [series_matrix](https://goo.gl/ZbBykZ)  | left atrium| 
+
+#### wgbs and rrbs datasets 
+
+| Study         | File link  |
+|---------------|------------|
+| [Roadmap Epigenetics Consortium (2015)](www.nature.com/nature/journal/v518/n7539/full/nature14248.html)| [Fractional methylation](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/FractionalMethylation.tar.gz), [File key](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/EG.mnemonics.name.xls) | 
+
+
+
+
+
 
 ### other 
 
