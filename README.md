@@ -41,9 +41,11 @@ Output files:
 
 #### wgbs and rrbs datasets 
 
-| Study         | File link  |
-|---------------|------------|
-| [Roadmap Epigenetics Consortium (2015)](www.nature.com/nature/journal/v518/n7539/full/nature14248.html)| [Fractional methylation](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/FractionalMethylation.tar.gz), [File key](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/EG.mnemonics.name.xls) | 
+| Study         | File link  | Data type  |
+|---------------|------------|------------|
+| [Roadmap Epigenetics Consortium (2015)](www.nature.com/nature/journal/v518/n7539/full/nature14248.html)| [Fractional methylation](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/RRBS/FractionalMethylation.tar.gz), [File key](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/RRBS/EG.mnemonics.name.xls) | RRBS | 
+| [Roadmap Epigenetics Consortium (2015)](www.nature.com/nature/journal/v518/n7539/full/nature14248.html)| [Fractional methylation](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/FractionalMethylation.tar.gz), [File key](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/EG.mnemonics.name.xls) | WGBS | 
+| [Jensen et al (2015)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0645-x)| [Raw fastq files](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/projects/gap/cgi-bin/study.cgi?study_id=phs000846.v1.p1)| WGBS | 
 
 
 
