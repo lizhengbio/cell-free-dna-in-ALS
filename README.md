@@ -35,21 +35,18 @@ Output files:
 |---------------|---------------|------------|------------|
 | [GSE40279](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40279)| [Hannum et al (2012)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23177740)| [series_matrix](https://goo.gl/CaGDpK)| whole blood|
 | [GSE40360](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40360)   | [Huynh et al (2014)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/24270187)| [series_matrix](https://goo.gl/vbjtji) | frontal lobe white matter|
-| [GSE71378](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE71378) | [Synder et al (2016)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/26771485)| [series_matrix](https://goo.gl/hvuGWr)     | healthy cfDNA|
 | [GSE48472](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE48472) | [Slieker et al (2013)](https://epigeneticsandchromatin.biomedcentral.com/articles/10.1186/1756-8935-6-26#Bib1)| [series_matrix](https://goo.gl/pP4Zoc)  | various tissues| 
 | [GSE62727](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE62727) | [Zhou et al (2017)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/28849195)| [series_matrix](https://goo.gl/ZbBykZ)  | left atrium| 
+| [GSE53162](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE53162) | [Ladd-Acosta et al (2014)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23999529)| [series_matrix](https://goo.gl/PJX2BB)  | prefrontal cortex| 
 
 #### wgbs and rrbs datasets 
 
-| Study         | File link  | Data type  |
-|---------------|------------|------------|
-| [Roadmap Epigenetics Consortium (2015)](www.nature.com/nature/journal/v518/n7539/full/nature14248.html)| [Fractional methylation](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/RRBS/FractionalMethylation.tar.gz), [File key](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/RRBS/EG.mnemonics.name.xls) | RRBS | 
-| [Roadmap Epigenetics Consortium (2015)](www.nature.com/nature/journal/v518/n7539/full/nature14248.html)| [Fractional methylation](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/FractionalMethylation.tar.gz), [File key](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/EG.mnemonics.name.xls) | WGBS | 
-| [Jensen et al (2015)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0645-x)| [Raw fastq files](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/projects/gap/cgi-bin/study.cgi?study_id=phs000846.v1.p1)| WGBS | 
-
-
-
-
+| Study         | File link  | Data type  | Tissue(s) | 
+|---------------|------------|------------|-----------|
+| [Roadmap Epigenetics Consortium (2015)](www.nature.com/nature/journal/v518/n7539/full/nature14248.html)| [Fractional methylation](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/RRBS/FractionalMethylation.tar.gz), [File key](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/RRBS/EG.mnemonics.name.xls) | RRBS | various |
+| [Roadmap Epigenetics Consortium (2015)](www.nature.com/nature/journal/v518/n7539/full/nature14248.html)| [Fractional methylation](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/FractionalMethylation.tar.gz), [File key](http://egg2.wustl.edu/roadmap/data/byDataType/dnamethylation/WGBS/EG.mnemonics.name.xls) | WGBS | various | 
+| [Jensen et al (2015)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0645-x)| [Raw fastq files](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/projects/gap/cgi-bin/study.cgi?study_id=phs000846.v1.p1)| WGBS | pregnant/non-pregnant cfDNA|
+| [GSE71378](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE71378) | [Synder et al (2016)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/26771485)| [series_matrix](https://goo.gl/hvuGWr)     | healthy cfDNA|
 
 
 ### other 
