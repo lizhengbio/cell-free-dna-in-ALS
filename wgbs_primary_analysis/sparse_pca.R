@@ -54,7 +54,7 @@ sparsePCARef <- function(O, K, t) {
 
 
 ################################### run PCA #######################################
-
+setwd("~/Documents/UCSF_year1/Zaitlen-rotation1/Zaitlen_lab/data/")
 # read in txt containing all CpGs found in all 8 samples used in this study 
 # this is a large file that may take several minutes to load into R 
 # an alternative to read.table() is: 
@@ -87,16 +87,16 @@ pcs = as.matrix(pcs) # just makes sure pcs are in an easy format to play nicely 
 # i calculated variance explained by hand for each pc using formula - standard.deviation(pc)^2 / sum of all pc sdev^2 * 100 
 
 # sets colors 
-colors = c("aquamarine4", "aquamarine4", "aquamarine4", "aquamarine4", "aquamarine1", "aquamarine1", "aquamarine1", "aquamarine1")
+colors = c("red", "red", "red", "red", "black", "black", "black", "black")
 
 # plots first pc versus 2nd pc as scatterplot 
-plot(pcs[,1], pcs[,2], col=colors, xlab="PC1 81% of var", ylab="PC2 15% of var", pch=19)
+plot(pcs[1,], pcs[2,], col=colors, xlab="PC1 81% of var", ylab="PC2 15% of var", pch=19)
 
 # adds text with the number of days each person (if relevant) has had ALS 
-text(pcs[,1], pcs[,2], labels=c("987", "560", "377", "652", "0", "0", "0", "0"), pos=1)
+text(pcs[1,], pcs[2,], labels=c("987", "560", "377", "652", "0", "0", "0", "0"), pos=1)
 
 # 2nd pc versus 3rd 
-plot(pcs[,2], pcs[,3], col=colors, xlab="PC2 15% of var", ylab="PC3 2% of var", pch=19)
+plot(pcs[1,], pcs[3,], col=colors, xlab="PC2 15% of var", ylab="PC3 2% of var", pch=19)
 
 # adds legend to plot 
 legend("topright",legend=c("ALS", "CTRL"), col=c("aquamarine1", "aquamarine4"), lty=1, cex=0.8)

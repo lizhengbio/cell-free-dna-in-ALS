@@ -8,5 +8,5 @@ sparse = read.table("sparse_sites.txt")
 
 d <- dist(var(sparse), method = "euclidean") # distance matrix
 fit <- hclust(d, method="ward.D2") 
-plot(fit, )
+plot(fit)
 
