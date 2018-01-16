@@ -21,4 +21,4 @@ for i, c in zip(range(len(meth_vals_rounded)), colors):
     plt.xlabel("CpG site")
     plt.ylabel("Proportion methylated")
 # plt.legend(loc=0)
-plt.show()
+plt.savefig("ex.ps", format="ps", dpi=1000)
