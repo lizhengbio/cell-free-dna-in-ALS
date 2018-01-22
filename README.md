@@ -48,6 +48,15 @@ Output files:
 | [Jensen et al (2015)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0645-x)| [Raw fastq files](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/projects/gap/cgi-bin/study.cgi?study_id=phs000846.v1.p1)| WGBS | pregnant/non-pregnant cfDNA|
 | [Synder et al (2016)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/26771485) | [series_matrix](https://goo.gl/hvuGWr)   | [series_matrix](https://goo.gl/hvuGWr)     | healthy cfDNA|
 
+Reference datasets were processed as followed: 
+
+1. Chip files were cleaned, and extraneous metadata was removed using `clean_chip_files.py` 
+2. Chip files were annotated with information consistent with WGBS reference data using `annotate_cpgs.R`
+		* CpG probe #'s in the chip files were annotated with their genomic location using Illumina `HumanMethylation450_15017482_v1-2.csv`
+		* Chip datasets were filtered to keep only datasets immediately relevant to ALS
+3. WGBS and Chip files were combined in a left outer join. i.e. Chip Cpgs were added to the appropriate DMRs taken from the Roadmap Epigenetics Consortium using `merge-those-files.py` (credit to [Arya Boudaie](https://github.com/misingnoglic) for help with a very fast algorithm to do this) 
+		*Combined dataframe was cleaned, missing data was replced with Nas. 
+4. Covariance and f-statistics were calculated for each CpG
 
 ### other 
 
