@@ -37,7 +37,9 @@ Output files:
 | [GSE40360](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE40360)   | [Huynh et al (2014)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/24270187)| [series_matrix](https://goo.gl/vbjtji) | frontal lobe white matter|
 | [GSE48472](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE48472) | [Slieker et al (2013)](https://epigeneticsandchromatin.biomedcentral.com/articles/10.1186/1756-8935-6-26#Bib1)| [series_matrix](https://goo.gl/pP4Zoc)  | various tissues| 
 | [GSE62727](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE62727) | [Zhou et al (2017)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/28849195)| [series_matrix](https://goo.gl/ZbBykZ)  | left atrium| 
-| [GSE53162](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE53162) | [Ladd-Acosta et al (2014)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23999529)| [series_matrix](https://goo.gl/PJX2BB)  | prefrontal cortex| 
+| [GSE53162](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE53162) | [Ladd-Acosta et al (2014)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/23999529)| [series_matrix](https://goo.gl/PJX2BB)  | prefrontal cortex|
+| [GSE54939](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/geo/query/acc.cgi?acc=GSE54939) |	
+[de Araújo É et al (2014)](https://www-ncbi-nlm-nih-gov.ucsf.idm.oclc.org/pubmed/25236571) |  [series_matrix](https://goo.gl/U8LCNk) | leukocytes | 
 
 #### wgbs and rrbs datasets 
 
@@ -52,10 +54,10 @@ Reference datasets were processed as followed:
 
 1. Chip files were cleaned, and extraneous metadata was removed using `clean_chip_files.py` 
 2. Chip files were annotated with information consistent with WGBS reference data using `annotate_cpgs.R`
-		* CpG probe #'s in the chip files were annotated with their genomic location using Illumina `HumanMethylation450_15017482_v1-2.csv`
-		* Chip datasets were filtered to keep only datasets immediately relevant to ALS
+	* CpG probe #'s in the chip files were annotated with their genomic location using Illumina `HumanMethylation450_15017482_v1-2.csv`
+	* Chip datasets were filtered to keep only datasets immediately relevant to ALS
 3. WGBS and Chip files were combined in a left outer join. i.e. Chip Cpgs were added to the appropriate DMRs taken from the Roadmap Epigenetics Consortium using `merge-those-files.py` (credit to [Arya Boudaie](https://github.com/misingnoglic) for help with a very fast algorithm to do this) 
-		*Combined dataframe was cleaned, missing data was replced with Nas. 
+	* Combined dataframe was cleaned, missing data was replced with Nas. 
 4. Covariance and f-statistics were calculated for each CpG
 
 ### other 
