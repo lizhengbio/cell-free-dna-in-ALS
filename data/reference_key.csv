@@ -1,0 +1,76 @@
+﻿Name,type
+GSM989994, whole blood
+GSM989995, whole blood
+GSM1283235,prefrontal cortex
+GSM1283237,prefrontal cortex
+GSM1283240,prefrontal cortex
+GSM1283242,prefrontal cortex
+GSM1283243,prefrontal cortex
+GSM1283245,temporal cortex
+GSM1283246,temporal cortex
+GSM1283247,temporal cortex
+GSM1283248,temporal cortex
+GSM1283249,temporal cortex
+GSM1283251,temporal cortex
+GSM1283252,temporal cortex
+GSM1283256,temporal cortex
+GSM1283257,temporal cortex
+GSM1283258,temporal cortex
+GSM1283268,cerebellum
+GSM1283269,cerebellum
+GSM1283270,cerebellum
+GSM1283271,cerebellum
+GSM1283272,cerebellum
+GSM1283273,cerebellum
+GSM1179508,muscle
+GSM1179509,muscle
+GSM1179510,muscle
+GSM1179511,muscle
+GSM1179512,muscle
+GSM1179513,muscle
+GSM1179497,blood
+GSM1179498,blood
+GSM1179499,blood
+GSM1179500,blood
+GSM1179501,blood
+GSM1179502,blood
+GSM992014,Frontal lobe white matter
+GSM992015,Frontal lobe white matter
+GSM992016,Frontal lobe white matter
+GSM992017,Frontal lobe white matter
+GSM992018,Frontal lobe white matter
+GSM992019,Frontal lobe white matter
+GSM992020,Frontal lobe white matter
+GSM992021,Frontal lobe white matter
+GSM992022,Frontal lobe white matter
+GSM992023,Frontal lobe white matter
+GSM992024,Frontal lobe white matter
+GSM992025,Frontal lobe white matter
+GSM992026,Frontal lobe white matter
+GSM992027,Frontal lobe white matter
+GSM992028,Frontal lobe white matter
+GSM992029,Frontal lobe white matter
+GSM992030,Frontal lobe white matter
+GSM992031,Frontal lobe white matter
+GSM992032,Frontal lobe white matter
+methylation_level_E050_RO_01549,CD34
+methylation_level_E053,Cortex
+methylation_level_E054,Ganglionic
+methylation_level_E058,Penis
+methylation_level_E065,Aorta
+methylation_level_E066,Liver
+methylation_level_E070,Brain 
+methylation_level_E071_149,Brain 
+methylation_level_E095_STL001,Left_Ventricle
+methylation_level_E095_STL003,Left_Ventricle
+methylation_level_E096,Lung 
+methylation_level_E097,Ovary 
+methylation_level_E098,Pancreas
+methylation_level_E100,Psoas
+methylation_level_E104,Right_atrium
+methylation_level_E105,Right_ventricle
+methylation_level_E106_STL001,Sigmoid_Colon
+methylation_level_E106_STL003,Sigmoid_Colon
+methylation_level_E109,Small_Intestine
+methylation_level_E112,Thymus
+methylation_level_E113,Spleen
