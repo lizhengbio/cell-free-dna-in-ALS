@@ -2,7 +2,7 @@ import csv
 import os
 __author__ = "Arya Boudaie"
 # This program merges two files containing site positions, one with a list of large dmr regions of the genome with many
-# methylation sites, and one with a list of single methylation sites. The program adds on the averege methylation values
+# methylation sites, and one with a list of single methylation sites. The program adds on the average methylation values
 # for the tissues to the file with the dmr regions corresponding with those methylation sites.
 
 new_file_name = "file3.csv"
