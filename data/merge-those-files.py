@@ -6,6 +6,35 @@ methylation sites, and one with a list of single methylation sites. The program 
 for the tissues to the file with the dmr regions corresponding with those methylation sites.
 """
 
+# Helper functions
+
+
+def flint(x):
+    """
+    Returns float(int(x)) - since the spreadsheet had numbers as floats
+    :param x: String representing number
+    :return: int of that number
+    """
+    return int(float(x))
+
+
+def chr_int(x):
+    """
+    Turns chromosome number into number, needed since chromosome could be x or y
+    :param x: 
+    :return: 
+    """
+    try:
+        return int(x)
+    except ValueError:
+        if x.lower() == "y":
+            return 101
+        elif x.lower() == "x":
+            return 100
+        else:
+            raise ValueError("Not sure what to do with value {}".format(x))
+
+
 # New file to be written, delete old one first
 os.system("rm file3.csv")
 
@@ -24,33 +53,6 @@ with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_fi
     small_line = next(methylation_sites)
 
     prev_row = []
-
-
-    def flint(x):
-        """
-        Returns float(int(x)) - since the spreadsheet had numbers as floats
-        :param x: String representing number
-        :return: int of that number
-        """
-        return int(float(x))
-
-
-    def chr_int(x):
-        """
-        Turns chromosome number into number, needed since chromosome could be x or y
-        :param x: 
-        :return: 
-        """
-        try:
-            return int(x)
-        except ValueError:
-            if x.lower() == "y":
-                return 101
-            elif x.lower() == "x":
-                return 100
-            else:
-                raise ValueError("Not sure what to do with value {}".format(x))
-
 
     # The strategy is to read through the lines in turn, starting with the first line of each, and advancing them
     # according to a set of rules to find the corresponding methylation sites for each dmr region.
