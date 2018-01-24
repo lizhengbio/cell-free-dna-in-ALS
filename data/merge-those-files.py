@@ -123,7 +123,7 @@ with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_fi
             # We kept track of the previous row written, in case the last value for big_line was not written.
             if prev_row != big_line:
                 new_file.writerow(big_line)
-            # Write the remaining DMR files, then exit the loop.
+            # Write the remaining DMR rows, then exit the loop.
             for line in dmr_regions:
                 new_file.writerow(line)
             finished_through_files = True
