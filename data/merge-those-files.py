@@ -46,13 +46,14 @@ with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_fi
     # For ease of remembering which are the small regions and which are the larger ones, I'll refer to them
     # as big and small
     big_line = next(dmr_regions)  # header for dmr file
-    small_line = next(methylation_sites)  # header for methlyation sites
+    small_line = next(methylation_sites)  # header for methylation sites
     new_file.writerow(big_line + small_line[3:])  # write the combination of the headers
 
+    # Advance both lines
     big_line = next(dmr_regions)
     small_line = next(methylation_sites)
 
-    prev_row = []
+    prev_row = []  # Keep track of the previous row written (useful for the end).
 
     # The strategy is to read through the lines in turn, starting with the first line of each, and advancing them
     # according to a set of rules to find the corresponding methylation sites for each dmr region.
@@ -73,46 +74,55 @@ with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_fi
             # If chromosomes don't match, then advance the smaller line.
             if small_chr < big_chr:
                 small_line = next(methylation_sites)
-                continue
             elif big_chr < small_chr:
                 # Every time we advance the DMR file, we must first write it's contents to the new file, since
                 new_file.writerow(big_line)
                 prev_row = big_line
                 big_line = next(dmr_regions)
-                continue
-            # chr is equal on both
-
-            if small_start < big_start:
-                small_line = next(methylation_sites)
-                continue
-            elif big_start <= small_start <= big_end and big_start <= small_end <= big_end:
-                row = big_line + small_line[3:]
-                keep_going = True
-                while keep_going:
+            # Now we know chr is equal on both
+            else:
+                # If the start of the small gap is less than the big gap, we know that methylation site doesn't fit
+                # in the DMR, and we need to try the next methylation site
+                if small_start < big_start:
                     small_line = next(methylation_sites)
-                    small_chr = chr_int(small_line[0])
-                    small_start, small_end = flint(small_line[1]), flint(small_line[2])
 
-                    if small_chr != big_chr:
-                        keep_going = False
-                    elif big_start <= small_start <= big_end and big_start <= small_end <= big_end:
-                        row += small_line[3:]
-                    else:
-                        keep_going = False
-
-                new_file.writerow(row)
-                prev_row = row
-                big_line = next(dmr_regions)
-                # small line already advanced in the above while loop
-                continue
-            else:  # small interval not in range, but next small number could be in range
-                new_file.writerow(big_line)
-                prev_row = big_line
-                big_line = next(dmr_regions)
-                continue
-        except StopIteration:  # Either no more small intervals or no more big intervals
+                # This is the case where the methylation site fits in the DMR
+                elif big_start <= small_start <= big_end and big_start <= small_end <= big_end:
+                    # the row to write (all the data except the chr, start, end of small_line)
+                    row = big_line + small_line[3:]
+                    keep_going = True
+                    # We need to go through the next methylation sites to see if they fits in this DMR before we write
+                    # the row.
+                    while keep_going:
+                        # Get the data for the next line
+                        small_line = next(methylation_sites)
+                        small_chr = chr_int(small_line[0])
+                        small_start, small_end = flint(small_line[1]), flint(small_line[2])
+                        # Break out of the loop of the chromosomes don't match, or the next site is not in range
+                        if small_chr != big_chr:
+                            keep_going = False
+                        elif big_start <= small_start <= big_end and big_start <= small_end <= big_end:
+                            row += small_line[3:]
+                        else:
+                            keep_going = False
+                    # Write the row
+                    new_file.writerow(row)
+                    prev_row = row
+                    # Advance the DMR file to the next line, as we have written every methylation site that fits
+                    # in this DMR. Note that small_line has already advanced to the next one above.
+                    big_line = next(dmr_regions)
+                # small interval not in range of DMR, but since small_start > big start, we have to check the next DMR
+                else:
+                    new_file.writerow(big_line)
+                    prev_row = big_line
+                    big_line = next(dmr_regions)
+        # If we get here, either we went through all the methylation sites, or all the DMRs.
+        # If we still have some more DMRs, we want to write them, and then finish.
+        except StopIteration:
+            # We kept track of the previous row written, in case the last value for big_line was not written.
             if prev_row != big_line:
                 new_file.writerow(big_line)
-            for line in dmr_regions:  # finish writing the big_interval lines
+            # Write the remaining DMR files, then exit the loop.
+            for line in dmr_regions:
                 new_file.writerow(line)
             finished_through_files = True
