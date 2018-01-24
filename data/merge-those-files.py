@@ -21,18 +21,18 @@ def flint(x):
 def chr_int(x):
     """
     Turns chromosome number into number, needed since chromosome could be x or y
-    :param x: 
-    :return: 
+    :param x: chromosome value
+    :return: int representing value of chromosome (or arbitrarily large numbers for x and y.
     """
+    # Arbitrary values for x and y, they just need to be > 21.
+    values = {"x": 100, "y": 101}
+    x = x.lower()
+    if x in values:
+        return values[x]
     try:
         return int(x)
     except ValueError:
-        if x.lower() == "y":
-            return 101
-        elif x.lower() == "x":
-            return 100
-        else:
-            raise ValueError("Not sure what to do with value {}".format(x))
+        raise ValueError("Not sure what to do with value {}".format(x))
 
 
 # New file to be written, delete old one first
