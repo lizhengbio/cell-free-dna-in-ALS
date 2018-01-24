@@ -93,7 +93,7 @@ with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_fi
                     row = big_line + small_line[3:]
                     keep_going = True
                     # We need to go through the next methylation sites to see if they fits in this DMR before we write
-                    # the row.
+                    # the row. We can stop at the first one that doesn't fit.
                     while keep_going:
                         # Get the data for the next line
                         small_line = next(methylation_sites)
