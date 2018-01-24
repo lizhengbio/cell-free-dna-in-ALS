@@ -5,6 +5,7 @@ __author__ = "Arya Boudaie"
 # methylation sites, and one with a list of single methylation sites. The program adds on the averege methylation values
 # for the tissues to the file with the dmr regions corresponding with those methylation sites.
 
+new_file_name = "file3.csv"
 # Helper functions:
 
 
@@ -35,9 +36,10 @@ def chr_int(x):
 
 
 # New file to be written, delete old one first
-os.system("rm file3.csv")
+if os.path.exists(new_file_name):
+    os.remove(new_file_name)
 
-with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_file, open("file3.csv", "w") as new_csv:
+with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_file, open(new_file_name, "w") as new_csv:
     dmr_regions = csv.reader(dmr_file, delimiter="\t")
     methylation_sites = csv.reader(meth_file, delimiter="\t")
     new_file = csv.writer(new_csv)
