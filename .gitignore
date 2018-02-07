@@ -1,1 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
+data/* 
+reference_data/*.icloud
+simulation/.idea/
