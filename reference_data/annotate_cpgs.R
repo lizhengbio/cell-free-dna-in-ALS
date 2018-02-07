@@ -6,13 +6,13 @@
 ######################### environment ###############################
 
 rm(list=ls())
-setwd("~/Documents/UCSF_year1/Zaitlen-rotation1/Zaitlen_lab/reference_data//")
+setwd("~/Documents/UCSF_year1/Zaitlen-rotation1/Zaitlen_lab/reference_data/")
 
 ######################### reference data ###############################
 
 illumina = read.table("HumanMethylationSites.txt", header=TRUE, sep=",") # loads in illumina info with probe name and location
 obs_cpg = read.table("cpgs.txt", header=TRUE) # a list of cpgs observed in my ALS dataset 
-merged_reference = read.table("reference_chip_data_merged.txt", header=TRUE) # my compiled reference cpg probes 
+merged_reference = read.table("../data/reference_chip_data_merged.txt", header=TRUE) # my compiled reference cpg probes 
 
 ######################### clean data ###############################
 
