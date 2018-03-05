@@ -40,8 +40,8 @@ def generate_reference(tissue, sites):
         rows.append(vals)
     return pd.DataFrame(rows).round(decimals=2)
 
-def generate_mixing_proportion(individuals, sites):
-    for
+# def generate_mixing_proportion(individuals, sites):
+#     for
 
 
 if __name__ == "__main__":
@@ -50,8 +50,9 @@ if __name__ == "__main__":
     sites = 10
     tissues = 2
 
-    # p = generate_proportion(tissues, individuals).as_matrix()
+    p = generate_proportion(tissues, individuals).as_matrix()
     r = generate_reference(tissues, sites).as_matrix()
+    print(p)
     # o = np.around(np.dot(p, r), decimals=2)
 
     # x, y = o.shape

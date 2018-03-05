@@ -5,7 +5,7 @@ __author__ = "Arya Boudaie"
 # methylation sites, and one with a list of single methylation sites. The program adds on the average methylation values
 # for the tissues to the file with the dmr regions corresponding with those methylation sites.
 
-new_file_name = "file3.csv"
+new_file_name = "rrbs-merged.txt"
 # Helper functions:
 
 
@@ -39,10 +39,10 @@ def chr_int(x):
 if os.path.exists(new_file_name):
     os.remove(new_file_name)
 
-with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_file, open(new_file_name, "w") as new_csv:
+with open("../refer-meth/reference_matrix.txt") as dmr_file, open("RRBS_DMRs_v2.txt") as meth_file, open(new_file_name, "w") as new_csv:
     dmr_regions = csv.reader(dmr_file, delimiter="\t")
     methylation_sites = csv.reader(meth_file, delimiter="\t")
-    new_file = csv.writer(new_csv)
+    new_file = csv.writer(new_csv, delimiter="\t")
 
     # For ease of remembering which are the small regions and which are the larger ones, I'll refer to them
     # as big and small
@@ -55,12 +55,19 @@ with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_fi
     small_line = next(methylation_sites)
 
     prev_row = []  # Keep track of the previous row written (useful for the end).
-
+    i = 0
     # The strategy is to read through the lines in turn, starting with the first line of each, and advancing them
     # according to a set of rules to find the corresponding methylation sites for each dmr region.
     # Runs in O(n+m) time, where n is number of dmr regions, and m is number of methylation sites.
     finished_through_files = False
     while not finished_through_files:
+        i+=1
+        print(i)
+
+        while not big_line:
+            big_line = next(dmr_regions)
+        while not small_line:
+            small_line = next(methylation_sites)
         try:
             # chromosome of methylation site
             small_chr = chr_int(small_line[0])
@@ -125,5 +132,5 @@ with open("WGBS_DMRs_v2.txt") as dmr_file, open("cpgs_by_tissue.txt") as meth_fi
                 new_file.writerow(big_line)
             # Write the remaining DMR rows, then exit the loop.
             for line in dmr_regions:
-                new_file.writerow(line)
+                if line: new_file.writerow(line)
             finished_through_files = True
