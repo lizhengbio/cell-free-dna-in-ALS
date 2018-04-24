@@ -1,0 +1,18 @@
+Analysis Type:	PANTHER Overrepresentation Test (Released 20171205)						
+Annotation Version and Release Date:	GO Ontology database  Released 2018-02-02						
+Analyzed List:	upload_1 (Homo sapiens)						
+Reference List:	Homo sapiens (all genes in database)						
+Test Type:	FISHER						
+GO cellular component complete	Homo sapiens - REFLIST (21042)	upload_1 (407)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+somatodendritic compartment (GO:0036477)	701	29	13.56	+	2.14	2.41E-04	4.62E-02
+neuron projection (GO:0043005)	1121	41	21.68	+	1.89	1.39E-04	3.34E-02
+neuron part (GO:0097458)	1432	49	27.7	+	1.77	1.50E-04	3.21E-02
+plasma membrane bounded cell projection (GO:0120025)	1871	59	36.19	+	1.63	3.01E-04	4.82E-02
+plasma membrane part (GO:0044459)	2717	79	52.55	+	1.5	2.53E-04	4.41E-02
+cytoplasm (GO:0005737)	11402	268	220.54	+	1.22	2.71E-06	5.21E-03
+intracellular (GO:0005622)	14596	321	282.32	+	1.14	2.64E-05	8.44E-03
+intracellular part (GO:0044424)	14264	313	275.9	+	1.13	6.93E-05	1.90E-02
+cell part (GO:0044464)	16811	360	325.16	+	1.11	7.77E-06	7.45E-03
+cell (GO:0005623)	16838	360	325.69	+	1.11	9.97E-06	6.38E-03
+cellular_component (GO:0005575)	18600	386	359.77	+	1.07	1.35E-05	6.48E-03
+Unclassified (UNCLASSIFIED)	2442	21	47.23	-	0.44	1.35E-05	5.19E-03

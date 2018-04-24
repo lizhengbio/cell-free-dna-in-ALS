@@ -1,0 +1,4 @@
+HUMAN|HGNC=3177|UniProtKB=P20800	1907	Endothelin-2;EDN2;ortholog	ENDOTHELIN-2 (PTHR13874:SF9)	peptide hormone(PC00179)	Homo sapiens
+HUMAN|HGNC=7108|UniProtKB=Q9NPJ1	8195	McKusick-Kaufman/Bardet-Biedl syndromes putative chaperonin;MKKS;ortholog	SYNDROMES PUTATIVE CHAPERONIN-RELATED (PTHR46787:SF1)		Homo sapiens
+HUMAN|HGNC=5293|UniProtKB=P28223	3356	5-hydroxytryptamine receptor 2A;HTR2A;ortholog	5-HYDROXYTRYPTAMINE RECEPTOR 2A (PTHR24247:SF30)	G-protein coupled receptor(PC00021)	Homo sapiens
+HUMAN|HGNC=3179|UniProtKB=P25101	1909	Endothelin-1 receptor;EDNRA;ortholog	ENDOTHELIN-1 RECEPTOR (PTHR46099:SF2)		Homo sapiens
