@@ -1,6 +1,3 @@
-# 8 nov 17
-# updates to the previous simulation so it makes more sense
-# integrated known information about tissues
 # author <christa.caggiano@ucsf.edu>
 
 import pandas as pd
@@ -67,32 +64,55 @@ def log_likelihood2(proportions, observed, reference):
 
     return ll
 
-if __name__ == "__main__":
 
-    individuals = 1
-    sites = 10000
-    tissues = 100
-    read_depth = 100
-
-    # @TODO add noise
-    proportions = generate_proportion(individuals, tissues).as_matrix()
-    reference = generate_reference(tissues, sites).as_matrix()
-    observed = np.matmul(proportions, reference)
-
-    proportions_est = np.random.rand(individuals, tissues)
+def perform_optimization_qp(individuals, tissues, proportions_est ):
 
     bounds = tuple((0, 1) for x in range(np.shape(proportions_est)[1]))
     cons = ({'type': 'eq', 'fun': lambda x: 1 - sum(x)})
 
     prop_guess_1 = minimize(log_likelihood, proportions_est, args=(observed, reference),
-                          bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter':1000})
+                            bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter': 1000})
+
+    return mean_squared_error(np.transpose(proportions[0]), (prop_guess_1["x"]/np.sum(prop_guess_1["x"])))
+
+
+def perform_optimization_lame(individuals, tissues, proportions_est):
+
+    bounds = tuple((0, 1) for x in range(np.shape(proportions_est)[1]))
 
     prop_guess_2 = minimize(log_likelihood2, proportions_est, args=(observed, reference),
-                          bounds=bounds, method="L-BFGS-B", options={'maxiter': 1000})
-    # print(prop_guess)
-    # print(prop_guess["x"]/np.sum(prop_guess["x"]))
-    # print(proportions)
+                            bounds=bounds, method="L-BFGS-B", options={'maxiter': 1000})
 
-    # @TODO mean squared error? what kind of error? make some plots
-    print(mean_squared_error(np.transpose(proportions[0]), (prop_guess_1["x"]/np.sum(prop_guess_1["x"]))))
-    print(mean_squared_error(np.transpose(proportions[0]), (prop_guess_2["x"]/np.sum(prop_guess_2["x"]))))
+    return mean_squared_error(np.transpose(proportions[0]), (prop_guess_2["x"]/np.sum(prop_guess_2["x"])))
+
+
+
+if __name__ == "__main__":
+
+    individuals = 1
+    sites = 10
+    tissues = 100
+    read_depth = 100
+
+    reg = []
+    qp = []
+
+    log_scale = [10**i for i in range(1,2)]
+
+    for sites in range(0, 20000, 1000):
+
+        proportions = generate_proportion(individuals, tissues).as_matrix()
+        reference = generate_reference(tissues, sites).as_matrix()
+        observed = np.matmul(proportions, reference)
+
+        observed = observed + np.random.normal(0, 0.05, observed.shape)
+
+        proportions_est = np.random.rand(individuals, tissues)
+
+        reg.append(perform_optimization_lame(individuals, tissues))
+        qp.append(perform_optimization_qp(individuals, tissues))
+
+    print(reg)
+    print(qp)
+
+
