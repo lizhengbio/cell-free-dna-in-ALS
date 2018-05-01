@@ -65,15 +65,15 @@ def log_likelihood2(proportions, observed, reference):
     return ll
 
 
-def perform_optimization_qp(individuals, tissues, proportions_est ):
+def perform_optimization_qp(individuals, tissues, proportions_est):
 
     bounds = tuple((0, 1) for x in range(np.shape(proportions_est)[1]))
     cons = ({'type': 'eq', 'fun': lambda x: 1 - sum(x)})
 
     prop_guess_1 = minimize(log_likelihood, proportions_est, args=(observed, reference),
-                            bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter': 1000})
+                            bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter': 10000})
 
-    return mean_squared_error(np.transpose(proportions[0]), (prop_guess_1["x"]/np.sum(prop_guess_1["x"])))
+    return mean_squared_error(np.transpose(proportions[0]), prop_guess_1["x"])
 
 
 def perform_optimization_lame(individuals, tissues, proportions_est):
@@ -81,26 +81,25 @@ def perform_optimization_lame(individuals, tissues, proportions_est):
     bounds = tuple((0, 1) for x in range(np.shape(proportions_est)[1]))
 
     prop_guess_2 = minimize(log_likelihood2, proportions_est, args=(observed, reference),
-                            bounds=bounds, method="L-BFGS-B", options={'maxiter': 1000})
-
-    return mean_squared_error(np.transpose(proportions[0]), (prop_guess_2["x"]/np.sum(prop_guess_2["x"])))
-
+                            bounds=bounds, method="L-BFGS-B", options={'maxiter': 10000})
+    print(prop_guess_2)
+    return mean_squared_error(np.transpose(proportions[0]), (prop_guess_2["x"]))
 
 
 if __name__ == "__main__":
 
     individuals = 1
-    sites = 10
+    sites = 10000
     tissues = 100
     read_depth = 100
 
     reg = []
     qp = []
 
-    log_scale = [10**i for i in range(1,2)]
 
-    for sites in range(0, 20000, 1000):
+    vals = [10, 100, 1000, 10000, 100000]
 
+    for tissues in vals:
         proportions = generate_proportion(individuals, tissues).as_matrix()
         reference = generate_reference(tissues, sites).as_matrix()
         observed = np.matmul(proportions, reference)
@@ -109,10 +108,10 @@ if __name__ == "__main__":
 
         proportions_est = np.random.rand(individuals, tissues)
 
-        reg.append(perform_optimization_lame(individuals, tissues))
-        qp.append(perform_optimization_qp(individuals, tissues))
+        reg.append(perform_optimization_lame(individuals, tissues, proportions_est))
+        qp.append(perform_optimization_qp(individuals, tissues, proportions_est))
 
-    print(reg)
-    print(qp)
+        print(reg)
+        print(qp)
 
 
