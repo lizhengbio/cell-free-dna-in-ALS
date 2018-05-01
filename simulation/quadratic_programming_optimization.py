@@ -47,13 +47,11 @@ def log_likelihood(proportions, observed, reference):
     """
     calculate log likelihood for optimization
 
-    :param proportions: estimation of proportions
+    :param proportions: current estimation of proportions
     :param observed: observed methylation states
     :param reference: reference methylation by tissue
     :return: log likelihood
     """
-
-    proportions = proportions/(proportions.sum(axis=0))  # manually dividing by sum of rows to constrain
 
     b = np.transpose(np.matmul(proportions, reference))
     sigma = np.var(observed-b)
@@ -67,22 +65,22 @@ def log_likelihood(proportions, observed, reference):
 
 def perform_optimization(proportions_est, proportions, observed, reference):
     """
-    use scipy optimize to perform minimization using BFGS
+    performs optimization using quadratic programming
 
-    :param individuals: number of individuals (always pretty much 1)
-    :param tissues: number of tissues
-    :param proportions_est:
-    :return:
+    :param proportions_est: estimation of proportions
+    :param proportions: 'true' proportions
+    :param observed: methylation patterns for cpgs
+    :param reference: reference methylation patterns for all tissues
+    :return: mean squared error between the true and estimated proportions
     """
 
-    bounds = tuple((0, 1) for x in range(np.shape(proportions_est)[1]))  # constrains that values in array must be prop
+    bounds = tuple((0, 1) for x in range(np.shape(proportions_est)[1]))
+    cons = ({'type': 'eq', 'fun': lambda x: 1 - sum(x)})
 
-    # perform minimization using scipy optimization, BFGS technique. Max iterations==10,000
     prop_guess = minimize(log_likelihood, proportions_est, args=(observed, reference),
-                          bounds=bounds, method="L-BFGS-B", options={'maxiter': 10000})
+                            bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter': 10000})
 
-    # return mean squared error
-    return mean_squared_error(np.transpose(proportions[0]), (prop_guess["x"]))
+    return mean_squared_error(np.transpose(proportions[0]), prop_guess["x"])
 
 
 if __name__ == "__main__":
@@ -92,13 +90,17 @@ if __name__ == "__main__":
     tissues = 100  # number of tissues
     read_depth = 100
 
-    proportions = generate_proportion(individuals, tissues).as_matrix()  # randomly initialized proportions of tissue for individual
-    reference = generate_reference(tissues, sites).as_matrix()  # cpg methylation fraction
-    observed = np.matmul(proportions, reference)  # observed estimated is just reference times the proportions
+    site_range = [10, 100, 1000, 100000]
 
-    observed = observed + np.random.normal(0, 0.05, observed.shape)  # add small amounts of noise to observed
+    for sites in site_range:
+        proportions = generate_proportion(individuals, tissues).as_matrix()  # randomly initialized proportions of tissue for individual
+        reference = generate_reference(tissues, sites).as_matrix()  # cpg methylation fraction
+        observed = np.matmul(proportions, reference)  # observed estimated is just reference times the proportions
 
-    proportions_est = np.random.rand(individuals, tissues)  # start with random estimation of proportions
+        observed = observed + np.random.normal(0, 0.05, observed.shape)  # add small amounts of noise to observed
 
-    mean_square_error = perform_optimization(proportions_est, proportions, observed, reference)  # perform optimization and return error
-    print(mean_square_error)
+        proportions_est = np.random.rand(individuals, tissues)  # start with random estimation of proportions
+
+        mean_square_error = perform_optimization(proportions_est, proportions, observed, reference)  # perform optimization and return error
+
+        print(mean_square_error)
