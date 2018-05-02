@@ -82,15 +82,15 @@ def perform_optimization(proportions_est, proportions, observed, reference):
                           bounds=bounds, method="L-BFGS-B", options={'maxiter': 10000})
 
     # return mean squared error
-    return mean_squared_error(np.transpose(proportions[0]), (prop_guess["x"]))
+    return np.transpose(proportions[0]), prop_guess["x"], mean_squared_error(np.transpose(proportions[0]), (prop_guess["x"]))
 
 
 if __name__ == "__main__":
 
     individuals = 1  # just optimizing for one person
-    sites = 10000  # number of cpg sites
+    sites = 1000  # number of cpg sites
     tissues = 100  # number of tissues
-    read_depth = 100
+    read_depth = 10
 
     proportions = generate_proportion(individuals, tissues).as_matrix()  # randomly initialized proportions of tissue for individual
     reference = generate_reference(tissues, sites).as_matrix()  # cpg methylation fraction
@@ -101,4 +101,7 @@ if __name__ == "__main__":
     proportions_est = np.random.rand(individuals, tissues)  # start with random estimation of proportions
 
     mean_square_error = perform_optimization(proportions_est, proportions, observed, reference)  # perform optimization and return error
-    print(mean_square_error)
+    print(mean_square_error[0])
+    print(mean_square_error[1])
+    print(mean_square_error[2]/(np.sum(np.square(proportions))))
+

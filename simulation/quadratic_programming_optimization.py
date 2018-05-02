@@ -78,29 +78,30 @@ def perform_optimization(proportions_est, proportions, observed, reference):
     cons = ({'type': 'eq', 'fun': lambda x: 1 - sum(x)})
 
     prop_guess = minimize(log_likelihood, proportions_est, args=(observed, reference),
-                            bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter': 10000})
+                            bounds=bounds, constraints=cons, method="SLSQP")
 
-    return mean_squared_error(np.transpose(proportions[0]), prop_guess["x"])
+    # return mean_squared_error(np.transpose(proportions[0]), prop_guess["x"])
+    return np.transpose(proportions[0]), prop_guess["x"], mean_squared_error(np.transpose(proportions[0]), (prop_guess["x"]))
 
 
 if __name__ == "__main__":
 
     individuals = 1  # just optimizing for one person
     sites = 10000  # number of cpg sites
-    tissues = 100  # number of tissues
+    tissues = 5  # number of tissues
     read_depth = 100
 
-    site_range = [10, 100, 1000, 100000]
+    # site_range = [10, 100, 1000, 100000]
 
-    for sites in site_range:
-        proportions = generate_proportion(individuals, tissues).as_matrix()  # randomly initialized proportions of tissue for individual
-        reference = generate_reference(tissues, sites).as_matrix()  # cpg methylation fraction
-        observed = np.matmul(proportions, reference)  # observed estimated is just reference times the proportions
+    proportions = generate_proportion(individuals, tissues).as_matrix()  # randomly initialized proportions of tissue for individual
+    reference = generate_reference(tissues, sites).as_matrix()  # cpg methylation fraction
+    observed = np.matmul(proportions, reference)  # observed estimated is just reference times the proportions
 
-        observed = observed + np.random.normal(0, 0.05, observed.shape)  # add small amounts of noise to observed
+    observed = observed + np.random.normal(0, 0.05, observed.shape)  # add small amounts of noise to observed
 
-        proportions_est = np.random.rand(individuals, tissues)  # start with random estimation of proportions
-
-        mean_square_error = perform_optimization(proportions_est, proportions, observed, reference)  # perform optimization and return error
-
-        print(mean_square_error)
+    proportions_est = np.random.rand(individuals, tissues)
+    proportions_est = proportions_est/proportions_est.sum() # start with random estimation of proportions
+    mean_square_error = perform_optimization(proportions_est, proportions, observed, reference)  # perform optimization and return error
+    print(mean_square_error[0])
+    print(mean_square_error[1])
+    print(mean_square_error[2]/(np.sum(np.square(proportions))))
