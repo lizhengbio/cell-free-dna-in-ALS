@@ -91,8 +91,6 @@ if __name__ == "__main__":
     tissues = 5  # number of tissues
     read_depth = 100
 
-    # site_range = [10, 100, 1000, 100000]
-
     proportions = generate_proportion(individuals, tissues).as_matrix()  # randomly initialized proportions of tissue for individual
     reference = generate_reference(tissues, sites).as_matrix()  # cpg methylation fraction
     observed = np.matmul(proportions, reference)  # observed estimated is just reference times the proportions
