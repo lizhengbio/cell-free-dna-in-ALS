@@ -31,19 +31,19 @@ if __name__ == "__main__":
 
 
 
-    site_range = [10, 100, 1000, 10000, 100000]
+    tissue_range = [10, 100, 1000, 10000, 100000]
 
     naive_error = []
     qp_error = []
 
-    for site in site_range:
+    for tissues in tissue_range:
         error = 0
         for individual in range(individuals):
             truth, guess = generate_optimization(1, sites, tissues, naive)
             error += (corr(truth, guess))
         naive_error.append(error/individuals)
 
-    for site in site_range:
+    for tissues in tissue_range:
         error = 0
         for individual in range(individuals):
             truth, guess = generate_optimization(1, sites, tissues, qp)
@@ -53,8 +53,8 @@ if __name__ == "__main__":
     print(naive_error)
     print(qp_error)
 
-    plt.plot(site_range, naive_error, '-bo')
-    plt.plot(site_range, qp_error, '-go')
+    plt.plot(tissue_range, naive_error, '-bo')
+    plt.plot(tissue_range, qp_error, '-go')
     plt.ylim(0, 1)
     plt.xscale("log")
     plt.show()

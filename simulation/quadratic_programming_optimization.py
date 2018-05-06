@@ -17,21 +17,20 @@ def log_likelihood(proportions, observed, reference):
     :param proportions: current estimation of proportions
     :param observed: observed methylation states
     :param reference: reference methylation by tissue
-    :return: log likelihood
+    :return: negative log likelihood
     """
 
     b = np.transpose(np.matmul(proportions, reference))
     sigma = np.var(observed-b)
     N = len(proportions)
 
-    # log likelihood function, copied from n. zaitlen's r code
+    # negative log likelihood function, copied from n. zaitlen's r code
     ll = np.sum(-N/2*np.log(2*np.pi) - N/2 * np.log(sigma) - 1/(2*sigma**2) * (np.sum((observed - b)**2)))
     return ll
 
 
 def counts_log_likelihood(proportions, methylated, unmethylated, reference):
 
-    proportions = proportions/(np.sum(proportions))
     b = np.matmul(proportions, reference)
     ll = np.sum(binom.logpmf(methylated, methylated+unmethylated, b, loc=0))
 
@@ -46,7 +45,7 @@ def perform_optimization(proportions_est, proportions, observed, reference, meth
     :param proportions: 'true' proportions
     :param observed: methylation patterns for cpgs
     :param reference: reference methylation patterns for all tissues
-    :return: mean squared error between the true and estimated proportions
+    :return: truth, guess
     """
 
     bounds = tuple([0, 1] for x in range(np.shape(proportions_est)[1]))

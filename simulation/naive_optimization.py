@@ -16,7 +16,7 @@ def log_likelihood(proportions, observed, reference):
     :param proportions: estimation of proportions
     :param observed: observed methylation states
     :param reference: reference methylation by tissue
-    :return: log likelihood
+    :return: negative log likelihood
     """
 
     proportions = proportions/np.sum(proportions)  # manually dividing by sum of rows to constrain
@@ -25,10 +25,10 @@ def log_likelihood(proportions, observed, reference):
     sigma = np.var(observed-b)
     N = len(proportions)
 
-    # log likelihood function, copied from n. zaitlen's r code
-    ll = np.sum(-N/2*np.log(2*np.pi) - N/2 * np.log(sigma) - 1/(2*sigma**2) * (np.sum((observed - b)**2)))
+    # negative log likelihood function, copied from n. zaitlen's r code
+    neg_ll = np.sum(-N/2*np.log(2*np.pi) - N/2 * np.log(sigma) - 1/(2*sigma**2) * (np.sum((observed - b)**2)))
 
-    return ll
+    return neg_ll
 
 
 def counts_log_likelihood(proportions, methylated, unmethylated, reference):
@@ -40,7 +40,6 @@ def counts_log_likelihood(proportions, methylated, unmethylated, reference):
     return -ll
 
 
-
 def perform_optimization(proportions_est, proportions, observed, reference, methylated, unmethylated):
     """
     use scipy optimize to perform minimization using BFGS
@@ -48,7 +47,7 @@ def perform_optimization(proportions_est, proportions, observed, reference, meth
     :param individuals: number of individuals (always pretty much 1)
     :param tissues: number of tissues
     :param proportions_est:
-    :return:
+    :return: truth, guess
     """
 
     bounds = tuple((0, 1) for x in range(np.shape(proportions_est)[1]))  # constrains that values in array must be prop
