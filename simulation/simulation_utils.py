@@ -2,6 +2,7 @@ import pandas as pd
 import random
 import numpy as np
 
+
 def generate_proportion(individuals, tissue):
     """
     generates the contribution of different tissues for

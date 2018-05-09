@@ -32,6 +32,7 @@ def log_likelihood(proportions, observed, reference):
 def counts_log_likelihood(proportions, methylated, unmethylated, reference):
 
     b = np.matmul(proportions, reference)
+
     ll = np.sum(binom.logpmf(methylated, methylated+unmethylated, b, loc=0))
 
     return -ll
