@@ -50,3 +50,11 @@ def generate_counts(depths, observed, sites, individuals):
 
     return counts
 
+
+def round_to_one(array):
+    for i in np.nditer(array, op_flags=['readwrite']):
+        if i > 1:
+            i[...] = 1
+        if i < 0:
+            i[...] = 0
+    return array

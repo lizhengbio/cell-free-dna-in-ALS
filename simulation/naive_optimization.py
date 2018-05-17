@@ -41,7 +41,7 @@ def counts_log_likelihood(proportions, methylated, unmethylated, reference):
     return -ll
 
 
-def perform_optimization(proportions_est, proportions, observed, reference, methylated, unmethylated):
+def perform_optimization(proportions_est, reference, methylated, unmethylated):
     """
     use scipy optimize to perform minimization using BFGS
 
@@ -55,8 +55,8 @@ def perform_optimization(proportions_est, proportions, observed, reference, meth
 
     # perform minimization using scipy optimization, BFGS technique. Max iterations==10,000
     prop_guess = minimize(counts_log_likelihood, proportions_est, args=(methylated, unmethylated, reference),
-                          bounds=bounds, method="L-BFGS-B", options={'maxiter': 10000})
+                          bounds=bounds, method="L-BFGS-B", options={'maxiter': 1000})
 
-    return np.transpose(proportions[0]), prop_guess["x"]
+    return prop_guess["x"]
 
 
