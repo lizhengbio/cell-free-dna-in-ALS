@@ -34,11 +34,10 @@ def counts_log_likelihood(proportions, methylated, unmethylated, reference):
     b = np.matmul(proportions, reference)
 
     ll = np.sum(binom.logpmf(methylated, methylated+unmethylated, b, loc=0))
+    return -ll/1000
 
-    return -ll
 
-
-def perform_optimization(proportions_est, proportions, reference, methylated, unmethylated):
+def perform_optimization(proportions_est, reference, methylated, unmethylated):
     """
     performs optimization using quadratic programming
 
@@ -53,7 +52,8 @@ def perform_optimization(proportions_est, proportions, reference, methylated, un
     cons = ({'type': 'eq', 'fun': lambda x: 1 - sum(x)})
 
     prop_guess = minimize(counts_log_likelihood, proportions_est, args=(methylated, unmethylated, reference),
-                            bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter': 1000, 'ftol': 1e-06})
+                            bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter': 10000, 'ftol': 1e-08})
 
-    return np.transpose(proportions[0]), prop_guess["x"]
+    print(prop_guess)
+    return prop_guess["x"]
 

@@ -4,68 +4,74 @@ from naive_optimization import perform_optimization as naive
 from quadratic_programming_optimization import perform_optimization as qp
 import numpy as np
 import matplotlib.pyplot as plt
+from run_utils import *
 
 
-def generate_optimization(individuals, sites, tissues, read_depth, method, noise):
+def generate_simulated_optimization(individuals, sites, tissues, read_depth, method, noise):
 
-    # proportions = generate_proportion(individuals, tissues).as_matrix()  # initialized proportions of tissue
-    # reference = generate_reference(tissues, sites).as_matrix()  # cpg methylation fraction
-    # observed = np.matmul(proportions, reference)  # observed estimated is just reference times the proportions
-    #
-    # # @TODO check between 0 1
-    # observed = observed + np.random.normal(0, noise, observed.shape)  # add small amounts of noise to observed
-    # observed = round_to_one(observed)
-    # depth = generate_depth(sites, individuals, read_depth)
-    # methylated = generate_counts(depth, observed, sites, individuals)
-    # unmethylated = depth - methylated
+    proportions = generate_proportion(individuals, tissues).as_matrix()  # initialized proportions of tissue
+    print(proportions)
+    reference = generate_reference(tissues, sites).as_matrix()  # cpg methylation fraction
+    observed = np.matmul(proportions, reference)  # observed estimated is just reference times the proportions
 
-    methylated = np.genfromtxt('obs1_meth.csv', delimiter=',')
-    unmethylated = np.genfromtxt('obs1_unmeth.csv', delimiter=',')
+    observed = observed + np.random.normal(0, noise, observed.shape)  # add small amounts of noise to observed
+    observed = round_to_one(observed)
+    depth = generate_depth(sites, individuals, read_depth)
+    methylated = generate_counts(depth, observed, sites, individuals)
+    unmethylated = depth - methylated
 
-    reference = np.genfromtxt('obs1_reference.csv', delimiter=',')
-
-    proportions_est = np.zeros((individuals, 119)) + 0.5  # start with random estimation of proportions
+    proportions_est = np.zeros((individuals, tissues)) + 0.5  # start with random estimation of proportions
     proportions_est = proportions_est/(np.sum(proportions_est))
 
+    print(methylated.shape)
+    print(unmethylated.shape)
+    print(proportions_est.shape)
+    print(reference.shape)
     return method(proportions_est, reference, methylated, unmethylated)
 
-if __name__ == "__main__":
 
-    individuals = 50  # number of people optimizing for
-    sites = 10000  # number of cpg sites
-    tissues = 50  # number of tissues
-    read_depth = 100  # read depth (methylated/unmethylated counts)
+# def plot_simulation():
 
-    print(generate_optimization(1, sites, tissues, read_depth, naive, 1))
-
-    # read_depth_range = [1000]
-    # noise_range = [0.01, 0.05, 0.1, 0.5]
-    #
     # naive_error = []
     # qp_error = []
     #
-    # for noise in noise_range:
-    #     error = 0
-    #     for individual in range(individuals):
-    #         truth, guess = generate_optimization(1, sites, tissues, read_depth, naive, noise)
-    #         error += (corr(truth, guess))
-    #     naive_error.append(error/individuals)
-    #     print(naive_error)
+    # error = 0
+    # for individual in range(individuals):
+    #     truth, guess = generate_simulated_optimization(1, sites, tissues, read_depth, naive, noise)
+    #     error += (corr(truth, guess))
+    # naive_error.append(error/individuals)
     #
-    # for noise in noise_range:
-    #     error = 0
-    #     for individual in range(individuals):
-    #         truth, guess = generate_optimization(1, sites, tissues, read_depth, qp, noise)
-    #         error += (corr(truth, guess))
-    #     qp_error.append(error/individuals)
-    #     print(qp_error)
-    #
-    # print(naive_error)
-    # print(qp_error)
-    #
-    # # box and whisker
+    # error = 0
+    # for individual in range(individuals):
+    #     guess = generate_simulated_optimization(1, sites, tissues, read_depth, qp, noise)
+    #     error += (corr(truth, guess))
+    # qp_error.append(error/individuals)
+
+    # @TODO box and whisker
     # plt.plot(noise_range, naive_error, '-bo')
     # plt.plot(noise_range, qp_error, '-go')
     # plt.ylim(0, 1.2)
     # plt.xscale("log")
     # plt.show()
+
+def generate_optimization(reference, methylated, unmethylated, method):
+
+    proportions_est = np.zeros((1, reference.shape[0])) + 0.5  # start with random estimation of proportions
+    proportions_est = proportions_est / (np.sum(proportions_est))
+    return method(proportions_est, reference, methylated, unmethylated)
+
+
+if __name__ == "__main__":
+
+    # global simulation parameters
+    individuals = 1  # number of people optimizing for
+    sites = 10000  # number of cpg sites
+    tissues = 5  # number of tissues
+    read_depth = 100  # read depth (methylated/unmethylated counts)
+    noise = 0.01
+
+    reference, methylated, unmethylated = generate_matrices("/Users/Christa.Caggiano/Documents/UCSF_year1/Zaitlen-rotation1/ALS_github/simulation/CTRL_1/control1.txt", "tissues.txt")
+    x = generate_optimization(reference, methylated, unmethylated, qp)
+    print(np.round(x, 2))
+    # x = generate_simulated_optimization(individuals, sites, tissues, read_depth, qp, noise)
+    # print(sum(x))

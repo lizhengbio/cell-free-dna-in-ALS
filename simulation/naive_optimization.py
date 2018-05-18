@@ -20,7 +20,6 @@ def log_likelihood(proportions, observed, reference):
     """
 
     proportions = proportions/np.sum(proportions)  # manually dividing by sum of rows to constrain
-
     b = np.transpose(np.matmul(proportions, reference))
     sigma = np.var(observed-b)
     N = len(proportions)
@@ -34,6 +33,7 @@ def log_likelihood(proportions, observed, reference):
 def counts_log_likelihood(proportions, methylated, unmethylated, reference):
 
     proportions = proportions/(np.sum(proportions))
+
     b = np.matmul(proportions, reference)
 
     ll = np.sum(binom.logpmf(methylated, methylated+unmethylated, b, loc=0))
@@ -55,8 +55,8 @@ def perform_optimization(proportions_est, reference, methylated, unmethylated):
 
     # perform minimization using scipy optimization, BFGS technique. Max iterations==10,000
     prop_guess = minimize(counts_log_likelihood, proportions_est, args=(methylated, unmethylated, reference),
-                          bounds=bounds, method="L-BFGS-B", options={'maxiter': 1000})
-
+                          bounds=bounds, method="L-BFGS-B", options={'maxiter': 10000, 'ftol': 1e-08})
+    print(prop_guess)
     return prop_guess["x"]
 
 
