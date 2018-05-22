@@ -24,6 +24,7 @@ def log_likelihood(proportions, observed, reference):
     sigma = np.var(observed-b)
     N = len(proportions)
 
+
     # negative log likelihood function, copied from n. zaitlen's r code
     ll = np.sum(-N/2*np.log(2*np.pi) - N/2 * np.log(sigma) - 1/(2*sigma**2) * (np.sum((observed - b)**2)))
     return ll

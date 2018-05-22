@@ -70,8 +70,12 @@ if __name__ == "__main__":
     read_depth = 100  # read depth (methylated/unmethylated counts)
     noise = 0.01
 
-    reference, methylated, unmethylated = generate_matrices("/Users/Christa.Caggiano/Documents/UCSF_year1/Zaitlen-rotation1/ALS_github/simulation/CTRL_1/control1.txt", "tissues.txt")
-    x = generate_optimization(reference, methylated, unmethylated, qp)
-    print(np.round(x, 2))
     # x = generate_simulated_optimization(individuals, sites, tissues, read_depth, qp, noise)
     # print(sum(x))
+
+    for patient in [ "als_2_header.txt", "als_3_header.txt", "als_4_header.txt",
+                    "ctrl_1_header.txt", "ctrl_2_header.txt", "ctrl_3_header.txt", "ctrl_4_header.txt"]:
+        reference, methylated, unmethylated = generate_matrices("/Users/Christa.Caggiano/Desktop/zaitlen_lab_desktop/" + patient, "tissues.txt")
+
+        x = generate_optimization(reference, methylated, unmethylated, qp)
+        np.savetxt(patient + "_qp__no_WGBS_results.txt", x)

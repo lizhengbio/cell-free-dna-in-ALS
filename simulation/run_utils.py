@@ -10,7 +10,9 @@ def generate_matrices(intersect_file, tissue_file):
     meth_array = data["meth"].values
     unmeth_array = data["unmeth"].values
 
-    reference = data.drop(["chr", "start", "end", "cpg", "chr.1", "start.1", "end.1", "meth", "unmeth", "total"], axis=1)
+    reference = data.drop(["chr", "start", "end", "chr.1", "start.1", "end.1", "meth",
+                           "unmeth", "total", "chr.2", "start.2", "end.2", "!Sample_geo_accession"], axis=1)
+
     tissues = read_tissues(tissue_file)
     average_reference = calculate_tissue_means(reference, tissues)
 
