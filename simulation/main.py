@@ -73,8 +73,7 @@ if __name__ == "__main__":
     # x = generate_simulated_optimization(individuals, sites, tissues, read_depth, qp, noise)
     # print(sum(x))
 
-    for patient in [ "als_2_header.txt", "als_3_header.txt", "als_4_header.txt",
-                    "ctrl_1_header.txt", "ctrl_2_header.txt", "ctrl_3_header.txt", "ctrl_4_header.txt"]:
+    for patient in ["ctrl1_common_header.txt"]:
         reference, methylated, unmethylated = generate_matrices("/Users/Christa.Caggiano/Desktop/zaitlen_lab_desktop/" + patient, "tissues.txt")
 
         x = generate_optimization(reference, methylated, unmethylated, qp)

@@ -113,8 +113,8 @@ def get_sequence(chrom, start, end):
     :return: sequence
     """
 
-    start = int(start) - 100  # hardcoded range around the cpg start and end :(
-    end = int(end) + 100
+    start = int(start) - 250  # hardcoded range around the cpg start and end :(
+    end = int(end) + 250
 
     # command to get the region from the two bit file from fasta
     cmd = ["/Users/Christa.Caggiano/Documents/software/twoBitToFa", "/Users/Christa.Caggiano/Documents/software/hg19.2bit",
@@ -140,7 +140,7 @@ if __name__ == "__main__":
 
     # TODO: command line arguments
 
-    bed_file = "pc-site.txt"  # file that primers are being gotten for
+    bed_file = "top_sparse_pcs/top_sites.bed.txt"  # file that primers are being gotten for
 
     output_file = bed_file.replace(".txt", "_primers.txt")  # output file name
 
