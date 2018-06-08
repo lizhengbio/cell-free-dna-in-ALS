@@ -4,14 +4,18 @@ import numpy as np
 
 def generate_matrices(intersect_file, tissue_file):
     data = pd.read_table(intersect_file, low_memory=False)
-    data = data.replace(to_replace=".", value=np.nan)
-    data = data.dropna()
 
-    meth_array = data["meth"].values
-    unmeth_array = data["unmeth"].values
+    reference = data.drop(["chr", "start", "end", "chr.1", "start.1", "end.1",
+                           "total", "chr.2", "start.2", "end.2", "!Sample_geo_accession"], axis=1)
 
-    reference = data.drop(["chr", "start", "end", "chr.1", "start.1", "end.1", "meth",
-                           "unmeth", "total", "chr.2", "start.2", "end.2", "!Sample_geo_accession"], axis=1)
+    reference = reference.replace(to_replace=".", value=np.nan)
+    reference = reference.fillna(data.mean())
+    reference = reference.dropna()
+
+    meth_array = reference["meth"].values
+    unmeth_array = reference["unmeth"].values
+
+    reference = reference.drop(["meth", "unmeth"], axis=1)
 
     tissues = read_tissues(tissue_file)
     average_reference = calculate_tissue_means(reference, tissues)

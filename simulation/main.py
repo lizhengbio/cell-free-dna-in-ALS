@@ -73,8 +73,7 @@ if __name__ == "__main__":
     # x = generate_simulated_optimization(individuals, sites, tissues, read_depth, qp, noise)
     # print(sum(x))
 
-    for patient in ["ctrl1_common_header.txt"]:
+    for patient in ["ctrl1_common_header.txt", "als1_common_header.txt"]:
         reference, methylated, unmethylated = generate_matrices("/Users/Christa.Caggiano/Desktop/zaitlen_lab_desktop/" + patient, "tissues.txt")
-
         x = generate_optimization(reference, methylated, unmethylated, qp)
         np.savetxt(patient + "_qp__no_WGBS_results.txt", x)

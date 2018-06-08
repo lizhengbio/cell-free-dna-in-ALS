@@ -1,0 +1,119 @@
+prefrontal cortex	GSM1283235
+prefrontal cortex	GSM1283237
+prefrontal cortex	GSM1283240
+prefrontal cortex	GSM1283242
+prefrontal cortex	GSM1283243
+temporal cortex	GSM1283245
+temporal cortex	GSM1283246
+temporal cortex	GSM1283247
+temporal cortex	GSM1283248
+temporal cortex	GSM1283249
+temporal cortex	GSM1283251
+temporal cortex	GSM1283252
+temporal cortex	GSM1283256
+temporal cortex	GSM1283257
+temporal cortex	GSM1283258
+cerebellum	GSM1283268
+cerebellum	GSM1283269
+cerebellum	GSM1283270
+cerebellum	GSM1283271
+cerebellum	GSM1283272
+cerebellum	GSM1283273
+normal lung	N1602.AVG_Beta
+normal lung	N1603.AVG_Beta
+normal lung	N1723.AVG_Beta
+normal lung	N1733.AVG_Beta
+fibrotic lung	F13332.AVG_Beta
+fibrotic lung	F13345.AVG_Beta
+fibrotic lung	F14351.AVG_Beta
+fibrotic lung	F14366.AVG_Beta
+whole blood	GSM989827
+whole blood	GSM989837
+whole blood	GSM989838
+leukocytes 	GSM1326838
+leukocytes 	GSM1326839
+leukocytes 	GSM1326840
+leukocytes 	GSM1326841
+leukocytes 	GSM1326842
+leukocytes 	GSM1326843
+leukocytes 	GSM1326844
+leukocytes 	GSM1326845
+left atrium 	GSM1532426
+left atrium 	GSM1532427
+left atrium 	GSM1532428
+left atrium 	GSM1532429
+Frontal lobe white matter	GSM992014
+Frontal lobe white matter	GSM992015
+Frontal lobe white matter	GSM992016
+Frontal lobe white matter	GSM992017
+Frontal lobe white matter	GSM992018
+Frontal lobe white matter	GSM992019
+Frontal lobe white matter	GSM992020
+Frontal lobe white matter	GSM992021
+Frontal lobe white matter	GSM992022
+Frontal lobe white matter	GSM992023
+Frontal lobe white matter	GSM992024
+Frontal lobe white matter	GSM992025
+Frontal lobe white matter	GSM992026
+Frontal lobe white matter	GSM992027
+Frontal lobe white matter	GSM992028
+Frontal lobe white matter	GSM992029
+Frontal lobe white matter	GSM992030
+Frontal lobe white matter	GSM992031
+Frontal lobe white matter	GSM992032
+blood	GSM1179497
+blood	GSM1179498
+blood	GSM1179499
+blood	GSM1179500
+blood	GSM1179501
+blood	GSM1179502
+liver	GSM1179503
+liver	GSM1179504
+liver	GSM1179505
+liver	GSM1179506
+liver	GSM1179507
+muscle	GSM1179508
+muscle	GSM1179509
+muscle	GSM1179510
+muscle	GSM1179511
+muscle	GSM1179512
+muscle	GSM1179513
+omentum	GSM1179514
+omentum	GSM1179515
+omentum	GSM1179516
+omentum	GSM1179517
+omentum	GSM1179518
+omentum	GSM1179519
+pancreas	GSM1179520
+pancreas	GSM1179521
+pancreas	GSM1179522
+pancreas	GSM1179523
+scfat	GSM1179524
+scfat	GSM1179525
+scfat	GSM1179526
+scfat	GSM1179527
+scfat	GSM1179528
+scfat	GSM1179529
+spleen	GSM1179530
+spleen	GSM1179531
+spleen	GSM1179532
+blood	GSM1179533
+blood	GSM1179534
+blood	GSM1179535
+blood	GSM1179536
+blood	GSM1179537
+buccal	GSM1179538
+buccal	GSM1179539
+buccal	GSM1179540
+buccal	GSM1179541
+buccal	GSM1179542
+hair	GSM1179543
+hair	GSM1179544
+hair	GSM1179545
+hair	GSM1179546
+hair	GSM1179547
+saliva	GSM1179548
+saliva	GSM1179549
+saliva	GSM1179550
+saliva	GSM1179551
+saliva	GSM1179552

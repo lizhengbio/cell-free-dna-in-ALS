@@ -1,0 +1,3 @@
+"fibrotic_average","healthy_lung_average","all_lung_average","not_lung_average","leuk_average","chr","start","X.Sample_geo_accession","gene_id","closest.SNP","SNP.allele.freq","gene_name"
+"387436",0.278725,0.75615,0.5174375,0.941958252427184,0.9594125,"1",1104366,"cg23651812","NR_029957","rs138358853;rs183812340","0.007388;0.000399
+","MIR429"
