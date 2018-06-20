@@ -3,10 +3,12 @@ from sklearn.metrics import mean_squared_error
 
 
 def mse(truth, guess):
+
     return mean_squared_error(truth, guess)
 
 
 def scaled_mse(truth, guess):
+
     return mean_squared_error(truth, guess)/(np.sum(np.square(truth)))
 
 
