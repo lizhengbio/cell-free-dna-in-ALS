@@ -41,3 +41,8 @@ def calculate_tissue_means(reference,  tissue_dict):
     print(list(tissue_average))
     return tissue_average.values
 
+
+def read_roadmap_reference(file):
+    roadmap = pd.read_table(file)
+
+    return (roadmap.as_matrix()).T
