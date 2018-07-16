@@ -31,10 +31,10 @@ def log_likelihood(proportions, observed, reference):
 
 
 def counts_log_likelihood(proportions, methylated, unmethylated, reference):
-
     b = np.matmul(proportions, reference)
 
     ll = np.sum(binom.logpmf(methylated, methylated+unmethylated, b, loc=0))
+    # print(ll)
     return -ll/1000
 
 
@@ -48,12 +48,11 @@ def perform_optimization(proportions_est, reference, methylated, unmethylated):
     :param reference: reference methylation patterns for all tissues
     :return: truth, guess
     """
-
     bounds = tuple([0, 1] for x in range(np.shape(proportions_est)[1]))
     cons = ({'type': 'eq', 'fun': lambda x: 1 - sum(x)})
 
     prop_guess = minimize(counts_log_likelihood, proportions_est, args=(methylated, unmethylated, reference),
-                            bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter': 10000, 'ftol': 1e-08})
+                            bounds=bounds, constraints=cons, method="SLSQP", options={'maxiter': 10000, 'ftol': 1e-010})
 
     # print(prop_guess)
     return prop_guess["x"]
