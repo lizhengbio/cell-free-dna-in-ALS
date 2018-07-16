@@ -11,13 +11,11 @@ def generate_simulated_optimization(individuals, sites, tissues, read_depth, met
 
     proportions = np.asarray(generate_proportion_fixed(individuals, tissues, fixed_proportion))
     # proportions = generate_proportion(individuals, tissues).as_matrix()  # initialized proportions of tissue
-    # print((proportions))
     # reference = generate_reference(tissues, sites).as_matrix()  # cpg methylation fraction
     reference = read_roadmap_reference("/Users/Christa.Caggiano/Desktop/zaitlen_lab_desktop/roadmap_top10000_var_DMRS.txt")
 
     observed = np.matmul(proportions, reference)  # observed estimated is just reference times the proportions
-    # observed = observed + np.random.normal(0, noise, observed.shape)  # add small amounts of noise to observed
-
+    observed = observed + np.random.normal(0, noise, observed.shape)  # add small amounts of noise to observed
     observed = round_to_one(observed)
     depth = generate_depth(sites, individuals, read_depth)
     methylated = generate_counts(depth, observed, sites, individuals)
@@ -30,15 +28,19 @@ def generate_simulated_optimization(individuals, sites, tissues, read_depth, met
 
 
 # global simulation parameters
-individuals = 10  # number of people optimizing for
+individuals = 50  # number of people optimizing for
 sites = 9999  # number of cpg sites
 tissues = 40  # number of tissues
 read_depth = 100  # read depth (methylated/unmethylated counts)
-noise = 0
+noise = 0.1
+
+
+# generate_simulated_optimization(1, sites, tissues, read_depth, qp, noise)
+
+
 
 naive_error = []
 qp_error = []
-
 read_depth_range = [10, 100, 1000, 10000]
 fixed_proportion_range = [10, 1, 0.1, 0.01]
 
