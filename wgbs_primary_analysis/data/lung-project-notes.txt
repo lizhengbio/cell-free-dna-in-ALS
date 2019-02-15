@@ -1,0 +1,7 @@
+aim- measuring turnover of airway epithelial cells & graft 
+hyp - increasing airway damage --> increase in rejection ? 
+show that can measure donoro derived cfDNA and DNA is epthelial cell derived 
+_vars.csv -> imputed donor and recipent genomes for 2 subjects --> looked for sites with recipent is homo and donor is either hetero and homo other allele 
+top sites between epithelium and other tissues, enrichment in number of reads for excess lung epithelium w/ high donor fraction 
+4 samples. - 2 'far out' 1 with rection, 1 without, 2 other samples on one patient, collected immediately after transplant (2 days and 2 weeks) -- after 2 days high donor fraction, 10%, 
+bar char with most likely site of origin for tissues 

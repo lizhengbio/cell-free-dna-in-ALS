@@ -14,11 +14,11 @@ rm(list=ls())
 
 ######################## sparePCA function from N. Zaitlen###################### 
 sparsePCARef <- function(O, K, t) {
-
+  
   # O is data matrix 
   # K is the number of components 
   # t is the number of methylation sites to be considered 
-
+  
   # more information about ReFActor method here: http://www.cs.tau.ac.il/~heran/cozygene/software/refactor.html
   
   num_components = K;
@@ -54,13 +54,13 @@ sparsePCARef <- function(O, K, t) {
 
 
 ################################### run PCA #######################################
-setwd("~/Documents/UCSF_year1/Zaitlen-rotation1/Zaitlen_lab/data/")
+setwd("/Users/Christa.Caggiano/Desktop/zaitlen_lab_desktop/")
 # read in txt containing all CpGs found in all 8 samples used in this study 
 # this is a large file that may take several minutes to load into R 
 # an alternative to read.table() is: 
 # require(data.table)
 # merged = fread("merged_all.txt")
-merged = read.table("merged_all.txt")
+
 
 # get the variance across samples for each CpG site
 # takes pretty long 
@@ -78,14 +78,16 @@ most_var = na.omit(most_var)
 # writes table with results for futher analyses 
 write.table(most_var, 'merged-most-var.txt')
 
+most_var = read.table("merged-most-var.txt")
+
 # runs sparse PCA on dataset, with 8 PCs and 500 sites
-pcs = sparsePCARef(most_var, 8, 500)  
+
+x = sparsePCARef(most_var, 8, 500)  
+x$pcs
+pcs = as.matrix(x$pcs) # just makes sure pcs are in an easy format to play nicely with plotting 
 write.table(pcs, "pcs.txt") # write table with the output 
 
-pcs = as.matrix(pcs) # just makes sure pcs are in an easy format to play nicely with plotting 
-
 # i calculated variance explained by hand for each pc using formula - standard.deviation(pc)^2 / sum of all pc sdev^2 * 100 
-
 # sets colors 
 colors = c("red", "red", "red", "red", "black", "black", "black", "black")
 
@@ -101,4 +103,4 @@ plot(pcs[1,], pcs[3,], col=colors, xlab="PC2 15% of var", ylab="PC3 2% of var", 
 # adds legend to plot 
 legend("topright",legend=c("ALS", "CTRL"), col=c("aquamarine1", "aquamarine4"), lty=1, cex=0.8)
 
-
+pcs
